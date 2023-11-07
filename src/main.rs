@@ -35,7 +35,7 @@ async fn main() {
 async fn index(extract::Path(lng): extract::Path<String>) -> impl IntoResponse {
     let template: IndexTemplate = IndexTemplate {
         lng,
-        t: |l: &String, k: &str| (D.get(format!("{l}.{k}").as_str()).unwrap()).to_string(),
+        t: |l: &String, k: &str| (D.get(format!("{l}.{k}").as_str()).unwrap_or(&&"")).to_string(),
     };
     HtmlTemplate(template)
 }
